@@ -13,5 +13,7 @@ namespace RecipeManagerApp.Data
         // Add DbSet for Recipes and Ingredients
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<Member> Members { get; set; }
+
     }
 }
