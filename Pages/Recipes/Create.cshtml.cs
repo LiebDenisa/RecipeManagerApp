@@ -10,7 +10,7 @@ using RecipeManagerApp.Models;
 
 namespace RecipeManagerApp.Pages.Recipes
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly RecipeManagerApp.Data.RecipeManagerAppContext _context;
