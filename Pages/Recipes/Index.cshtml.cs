@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using RecipeManagerApp.Data;
@@ -7,8 +8,10 @@ using System.Linq;
 
 namespace RecipeManagerApp.Pages.Recipes
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
+        
         private readonly RecipeManagerAppContext _context;
 
         public IndexModel(RecipeManagerAppContext context)

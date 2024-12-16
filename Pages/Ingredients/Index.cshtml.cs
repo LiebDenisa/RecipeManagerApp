@@ -4,9 +4,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RecipeManagerApp.Data;
 using RecipeManagerApp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace RecipeManagerApp.Pages.Ingredients // Add the correct namespace here
 {
+    [Authorize]
     public class IndexModel : PageModel
     {
         private readonly RecipeManagerAppContext _context;
