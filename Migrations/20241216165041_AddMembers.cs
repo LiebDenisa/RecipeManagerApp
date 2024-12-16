@@ -5,7 +5,7 @@
 namespace RecipeManagerApp.Migrations
 {
     /// <inheritdoc />
-    public partial class AddIdentityRoles : Migration
+    public partial class AddMembers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

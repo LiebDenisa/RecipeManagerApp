@@ -12,8 +12,8 @@ using RecipeManagerApp.Data;
 namespace RecipeManagerApp.Migrations
 {
     [DbContext(typeof(RecipeManagerAppContext))]
-    [Migration("20241216143311_UpdateIdentityDbContext")]
-    partial class UpdateIdentityDbContext
+    [Migration("20241216164453_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
