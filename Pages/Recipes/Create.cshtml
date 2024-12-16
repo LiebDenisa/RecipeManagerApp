@@ -1,0 +1,86 @@
+﻿@page
+@model RecipeManagerApp.Pages.Recipes.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Recipe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Recipe Fields -->
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Recipe.Title" class="control-label"></label>
+                <input asp-for="Recipe.Title" class="form-control" />
+                <span asp-validation-for="Recipe.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Recipe.Description" class="control-label"></label>
+                <textarea asp-for="Recipe.Description" class="form-control"></textarea>
+                <span asp-validation-for="Recipe.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.PreparationTime" class="control-label"></label>
+                <input asp-for="Recipe.PreparationTime" class="form-control" />
+                <span asp-validation-for="Recipe.PreparationTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.DateCreated" class="control-label"></label>
+                <input asp-for="Recipe.DateCreated" class="form-control" />
+                <span asp-validation-for="Recipe.DateCreated" class="text-danger"></span>
+            </div>
+
+            <!-- Ingredient Fields -->
+            <h4>Ingredients</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ingredientTable">
+                    <!-- This row will be dynamically added -->
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-secondary" onclick="addIngredient()">Add Ingredient</button>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        function addIngredient() {
+            const table = document.getElementById("ingredientTable");
+            const row = table.insertRow();
+            row.innerHTML = `
+                <td><input name="Ingredients[${table.rows.length - 1}].Name" class="form-control" /></td>
+                <td><input name="Ingredients[${table.rows.length - 1}].Quantity" class="form-control" /></td>
+                <td><input name="Ingredients[${table.rows.length - 1}].Unit" class="form-control" /></td>
+                <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+            `;
+        }
+
+        function removeRow(button) {
+            button.closest("tr").remove();
+        }
+    </script>
+}

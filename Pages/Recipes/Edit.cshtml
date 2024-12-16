@@ -1,0 +1,97 @@
+﻿@page
+@model RecipeManagerApp.Pages.Recipes.EditModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Recipe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Recipe.ID" />
+
+            <!-- Recipe Fields -->
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Recipe.Title" class="control-label"></label>
+                <input asp-for="Recipe.Title" class="form-control" />
+                <span asp-validation-for="Recipe.Title" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <span class="text-danger">*</span>
+                <label asp-for="Recipe.Description" class="control-label"></label>
+                <textarea asp-for="Recipe.Description" class="form-control"></textarea>
+                <span asp-validation-for="Recipe.Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.PreparationTime" class="control-label"></label>
+                <input asp-for="Recipe.PreparationTime" class="form-control" />
+                <span asp-validation-for="Recipe.PreparationTime" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.DateCreated" class="control-label"></label>
+                <input asp-for="Recipe.DateCreated" class="form-control" />
+                <span asp-validation-for="Recipe.DateCreated" class="text-danger"></span>
+            </div>
+
+            <!-- Ingredients Table -->
+            <h4>Ingredients</h4>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Quantity</th>
+                        <th>Unit</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="ingredientTable">
+                    @for (var i = 0; i < Model.Ingredients.Count; i++)
+                    {
+                        <tr>
+                            <td><input name="Ingredients[@i].Name" class="form-control" value="@Model.Ingredients[i].Name" /></td>
+                            <td><input name="Ingredients[@i].Quantity" class="form-control" value="@Model.Ingredients[i].Quantity" /></td>
+                            <td><input name="Ingredients[@i].Unit" class="form-control" value="@Model.Ingredients[i].Unit" /></td>
+                            <td>
+                                <button type="button" class="btn btn-danger" onclick="removeIngredient(this)">Remove</button>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-secondary" onclick="addIngredient()">Add Ingredient</button>
+
+            <div class="form-group mt-4">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <script>
+        function addIngredient() {
+            const table = document.getElementById("ingredientTable");
+            const row = table.insertRow();
+            row.innerHTML = `
+                <td><input name="Ingredients[${table.rows.length - 1}].Name" class="form-control" /></td>
+                <td><input name="Ingredients[${table.rows.length - 1}].Quantity" class="form-control" /></td>
+                <td><input name="Ingredients[${table.rows.length - 1}].Unit" class="form-control" /></td>
+                <td><button type="button" class="btn btn-danger" onclick="removeIngredient(this)">Remove</button></td>
+            `;
+        }
+
+        function removeIngredient(button) {
+            button.closest("tr").remove();
+        }
+    </script>
+}
