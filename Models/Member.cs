@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
+namespace RecipeManagerApp.Models;
 public class Member
 {
     public int ID { get; set; }
